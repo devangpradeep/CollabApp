@@ -5,13 +5,15 @@ Rails.application.routes.draw do
     get 'login', to: 'devise/sessions#new'
     get 'signup', to: 'devise/registrations#new'
   end
-  get '/post/:id', to: 'posts#show', as: 'post'
-  resource :posts do 
+  # get '/post/:id', to: 'posts#show', as: 'post'
+  # get '/post/:id/edit', to: 'posts#edit', as: 'edit_post'
+  resources :posts do 
     collection do
       get 'hobby'
       get 'study'
       get 'team'
     end
+    
   end 
   # Defines the root path route ("/")
   root "pages#index"

@@ -4,6 +4,7 @@
       <h4 class="post-text">
       <%= truncate(post.title, :length => 60) %>
       </h4>
+      <%#= post.branch%>
       <div class="post-content">
         <div class="posted-by">Posted by <%= post.user.name %></div>
         <h3><%= post.title %></h3> 
