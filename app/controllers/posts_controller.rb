@@ -25,13 +25,25 @@ class PostsController < ApplicationController
     end
 
     def create
-        puts post_params
         @post = Post.new(post_params)
         if @post.save!
             redirect_to post_path(@post[:id])
           else
             redirect_to root_path
           end
+    end
+
+    def edit
+        @post = Post.find(params[:id])
+    end
+
+    def update
+        @post = Post.find(params[:id])
+        if @post.update(update_post_params)
+            redirect_to post_path(@post[:id])
+        else
+            redirect_to root_path
+        end
     end
     
       
@@ -56,5 +68,9 @@ class PostsController < ApplicationController
 
     def post_params
         params.require(:post).permit(:content, :title, :category_id).merge(user_id: current_user.id)
+    end
+
+    def update_post_params
+        params.require(:post).permit(:content, :title)
     end
 end
