@@ -39,7 +39,7 @@ module PostsHelper
     end
 
     def user_matching_author_partial_path
-      if @post.user_id == current_user.id
+      if current_user && @post.user_id == current_user.id
         'posts/show/user_matching_author'
       else
         'posts/show/user_not_matching_author'
