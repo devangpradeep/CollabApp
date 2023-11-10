@@ -35,6 +35,8 @@ class PostsController < ApplicationController
 
     def edit
         @post = Post.find(params[:id])
+        @branch = Category.find(@post[:category_id])[:branch]
+        @categories =  Category.where(branch: @branch)
     end
 
     def update
@@ -50,6 +52,10 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         @post.destroy
         redirect_to root_path
+    end
+
+    def my
+        @posts = Post.where(user_id:current_user[:id])
     end
     
       
