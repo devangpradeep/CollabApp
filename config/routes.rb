@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'hobby'
       get 'study'
       get 'team'
+      get 'my'
     end
     
   end 
