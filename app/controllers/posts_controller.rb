@@ -4,6 +4,9 @@ class PostsController < ApplicationController
 
     def show
         @post = Post.find(params[:id])
+        if user_signed_in?
+            @message_has_been_sent = conversation_exist?
+        end
     end
 
     def hobby
@@ -84,5 +87,9 @@ class PostsController < ApplicationController
 
     def update_post_params
         params.require(:post).permit(:content, :title)
+    end
+    
+    def conversation_exist?
+        Private::Conversation.between_user(current_user.id, @post.user.id).present?
     end
 end
